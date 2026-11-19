@@ -1,6 +1,6 @@
 # Omar's Skills
 
-An interactive engineering skill repository and AI-code review workstation. It turns two working documents — an **AI-Generated Code Review Protocol** and a **Junior Developer Growth Framework** — into a tool you can actually run: a review checklist you tick off, a stress matrix that blocks a merge, a skill tree you track, and a roadmap you work through.
+An interactive AI-code review workstation. It turns the **AI-Generated Code Review Protocol** into a tool you can run: a review checklist you tick off and a stress matrix that blocks a merge.
 
 > ship fast. own every line.
 
@@ -10,8 +10,6 @@ An interactive engineering skill repository and AI-code review workstation. It t
 | --- | --- | --- |
 | **Review Runway** | `/` | The four review checkpoints in order — scope bounding, approval gating, diff auditing, pre-merge gate — plus a side-effect map that traces a database write, outbound request, background job or event back to the input boundary it came from, and the three priority audit checklists. |
 | **Stress Matrix** | `/matrix` | 16 checks across five boundaries (payload, configuration, network, exceptions, concurrency), each tagged `Blocker`, `Warning` or `Nitpick`. Mark pass / fail / waive and the score and merge status update live — a failed blocker reads **Merge blocked**. Includes a red-team prompt generator with a copy button and a log of failure modes you hit. |
-| **Skill Repository** | `/skills` | 8 core and 5 supplementary skills across 6 domains, filterable by domain, tier and status. Each skill shows its competencies, practice exercises, what it builds on and what it unlocks. Set your own status: Not started → Learning → Proficient. |
-| **Growth Roadmap** | `/roadmap` | Three phases — Foundational Proficiency, Architecture & Quality, Technical Ownership — with milestone checkboxes and progress bars. |
 | **Docs** | `/docs` | Reads the markdown files in `docs/` straight into the app, so the repo docs and the in-app docs are the same file. |
 
 Dark and light mode, no login, nothing to install.
@@ -45,14 +43,10 @@ src/
   data/
     review.ts      checkpoints, side effects, trace layers, audit checklists,
                    the 16 boundary checks + scoreMatrix()
-    skills.ts      DOMAINS, SKILLS (8 core + 5 supplementary), STATUSES
-    roadmap.ts     PHASES and their milestones
     review.test.ts tests for the scoring rule
   routes/
     index.tsx      Review Runway
     matrix.tsx     Stress Matrix
-    skills.tsx     Skill Repository
-    roadmap.tsx    Growth Roadmap
     docs.tsx       in-app docs viewer
     __root.tsx     shell, theme, 404 and error screens
   components/app/
@@ -63,23 +57,18 @@ src/
 docs/
   VISION_AND_ARCHITECTURE.md   the senior-engineering vision and why it's built this way
   CODE_REVIEW_SOP.md           the standard operating procedure for reviewing AI output
-  EXTENDING_SKILLS.md          how to add a new skill domain
-  ADDING_A_SKILL.md            field-by-field recipe for adding one skill to the canvas
 ```
 
 ### Adding or changing content
 
-- **New skill** — add one object to `SKILLS` in `src/data/skills.ts`: `id`, `name`, `domain`, `tier`, `summary`, `competencies`, `practice`, optional `prerequisites`, and a Lucide `icon`. It appears in the repository automatically. `docs/ADDING_A_SKILL.md` is the field-by-field recipe, including how `prerequisites` turns into a visible edge in the canvas.
-- **New domain** (e.g. Security, DevOps, Frontend) — add it to `DOMAINS` in the same file and point skills at it. `docs/EXTENDING_SKILLS.md` walks through it end to end.
 - **New review check** — add it to a boundary's `checks` array in `src/data/review.ts` with a `severity`. The score, blocker count and merge status pick it up with no other change.
-- **New milestone or phase** — edit `PHASES` in `src/data/roadmap.ts`.
 - **New doc** — drop a `.md` file in `docs/` and register it in `src/routes/docs.tsx`; it renders in the Docs tab.
 
 `scoreMatrix()` is the one piece of real logic (score, decided count, failed blockers) and it's covered by `src/data/review.test.ts`. If you change a scoring rule, change that test with it.
 
 ### Where your progress lives
 
-Tick marks, skill statuses, logged failure modes and the theme are stored in **your browser's localStorage** (`use-local-state.ts`). There is no backend and no account: nothing syncs between people or devices, and clearing site data resets you to zero. That's deliberate — this is a personal and team reference tool, not a service.
+Tick marks, logged failure modes and the theme are stored in **your browser's localStorage** (`use-local-state.ts`). There is no backend and no account: nothing syncs between people or devices, and clearing site data resets you to zero. That's deliberate — this is a personal and team reference tool, not a service.
 
 ## Tech
 

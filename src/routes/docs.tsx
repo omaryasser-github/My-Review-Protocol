@@ -5,20 +5,16 @@ import remarkGfm from "remark-gfm";
 import { FileText } from "lucide-react";
 import vision from "../../docs/VISION_AND_ARCHITECTURE.md?raw";
 import sop from "../../docs/CODE_REVIEW_SOP.md?raw";
-import extending from "../../docs/EXTENDING_SKILLS.md?raw";
-import adding from "../../docs/ADDING_A_SKILL.md?raw";
 import { meta } from "@/components/app/AppShell";
 
 export const Route = createFileRoute("/docs")({
-  head: () => meta("Docs — Omar's Skills", "Vision, code review SOP and guide to extending the skill repository."),
+  head: () => meta("Docs — Omar's Skills", "Vision, code review SOP for reviewing AI-generated code."),
   component: Docs,
 });
 
 const DOCS = [
   { id: "vision", title: "Vision & Architecture", file: "VISION_AND_ARCHITECTURE.md", body: vision },
   { id: "sop", title: "Code Review SOP", file: "CODE_REVIEW_SOP.md", body: sop },
-  { id: "extending", title: "Extending Skills", file: "EXTENDING_SKILLS.md", body: extending },
-  { id: "adding", title: "Adding a Skill to the Canvas", file: "ADDING_A_SKILL.md", body: adding },
 ];
 
 function Docs() {

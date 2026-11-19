@@ -1,12 +1,10 @@
 import { Link } from "@tanstack/react-router";
-import { Route as RouteIcon, Grid3x3, Network, Map, BookOpen, Moon, Sun, Terminal } from "lucide-react";
+import { Route as RouteIcon, Grid3x3, BookOpen, Moon, Sun, Terminal } from "lucide-react";
 import { useEffect, useState, type ReactNode } from "react";
 
 const NAV = [
   { to: "/", label: "Review Runway", icon: RouteIcon },
   { to: "/matrix", label: "Stress Matrix", icon: Grid3x3 },
-  { to: "/skills", label: "Skill Repository", icon: Network },
-  { to: "/roadmap", label: "Growth Roadmap", icon: Map },
   { to: "/docs", label: "Docs", icon: BookOpen },
 ] as const;
 
