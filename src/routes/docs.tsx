@@ -20,7 +20,7 @@ const DOCS = [
 ];
 
 function Docs() {
-  const [id, setId] = useState(DOCS[0].id);
+  const [id, setId] = useState(DOCS[0]!.id);
   const doc = DOCS.find((d) => d.id === id)!;
   return (
     <div className="grid min-h-screen lg:grid-cols-[240px_1fr]">
