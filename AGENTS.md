@@ -28,3 +28,8 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+- All methodology content (skills, checkpoints, boundaries, roadmap) lives as typed data in `src/data/*`; pages are thin renderers so content can grow without UI changes.
+- User progress is stored in browser localStorage via `src/lib/use-local-state.ts`; no backend, because the app is a personal/team reference tool.
+- Markdown in `docs/` is imported with `?raw` and rendered in `/docs`, so the repo docs and the in-app docs never drift.
