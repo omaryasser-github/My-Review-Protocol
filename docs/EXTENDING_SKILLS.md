@@ -2,6 +2,8 @@
 
 All skills live in **`src/data/skills.ts`**. The UI reads the registry; you never touch a component to add a skill.
 
+> Want the exact field-by-field recipe, including how `prerequisites` becomes a visible edge in the canvas and how to verify it? See **[ADDING_A_SKILL.md](ADDING_A_SKILL.md)**.
+
 ## Schema
 ```ts
 export interface Skill {

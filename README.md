@@ -64,11 +64,12 @@ docs/
   VISION_AND_ARCHITECTURE.md   the senior-engineering vision and why it's built this way
   CODE_REVIEW_SOP.md           the standard operating procedure for reviewing AI output
   EXTENDING_SKILLS.md          how to add a new skill domain
+  ADDING_A_SKILL.md            field-by-field recipe for adding one skill to the canvas
 ```
 
 ### Adding or changing content
 
-- **New skill** — add one object to `SKILLS` in `src/data/skills.ts`: `id`, `name`, `domain`, `tier`, `summary`, `competencies`, `practice`, optional `prerequisites`, and a Lucide `icon`. It appears in the repository automatically.
+- **New skill** — add one object to `SKILLS` in `src/data/skills.ts`: `id`, `name`, `domain`, `tier`, `summary`, `competencies`, `practice`, optional `prerequisites`, and a Lucide `icon`. It appears in the repository automatically. `docs/ADDING_A_SKILL.md` is the field-by-field recipe, including how `prerequisites` turns into a visible edge in the canvas.
 - **New domain** (e.g. Security, DevOps, Frontend) — add it to `DOMAINS` in the same file and point skills at it. `docs/EXTENDING_SKILLS.md` walks through it end to end.
 - **New review check** — add it to a boundary's `checks` array in `src/data/review.ts` with a `severity`. The score, blocker count and merge status pick it up with no other change.
 - **New milestone or phase** — edit `PHASES` in `src/data/roadmap.ts`.
