@@ -11,7 +11,7 @@ An interactive AI-code review workstation. It turns the **AI-Generated Code Revi
 | **Review Runway** | `/` | The four review checkpoints in order — scope bounding, approval gating, diff auditing, pre-merge gate — plus a side-effect map that traces a database write, outbound request, background job or event back to the input boundary it came from, and the three priority audit checklists. |
 | **Core Review Protocol** | `/protocol` | Six guided stages from Section 2 of the guide (stages 2.1 and 2.2 include the Section 3.2 AI self-explanation prompt) — write your intent before reading the code, then outside-in reading, line auditing, stress testing, test integrity and diff gating. Progress is saved. |
 | **Stress Matrix** | `/matrix` | 16 checks across five boundaries (payload, configuration, network, exceptions, concurrency), each tagged `Blocker`, `Warning` or `Nitpick`. Mark pass / fail / waive and the score and merge status update live — a failed blocker reads **Merge blocked**. Includes a red-team prompt generator with a copy button and a log of failure modes you hit, with Section 3.3 failure trends ranking which boundaries break most. |
-| **Ownership & Practice** | `/ownership` | Section 3.4: a three-question line-ownership check before merge and a monthly unassisted-rebuild log with a due-date countdown. |
+| **Ownership & Practice** | `/ownership` | Section 3.4: a three-question line-ownership check to answer before every merge. |
 | **Docs** | `/docs` | Reads the markdown files in `docs/` straight into the app, so the repo docs and the in-app docs are the same file. |
 
 Dark and light mode, no login, nothing to install.

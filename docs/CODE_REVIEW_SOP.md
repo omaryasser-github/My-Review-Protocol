@@ -48,7 +48,7 @@ Use the generator in the Stress Matrix to ask a *second* model to attack the cha
 ## Governance & Ownership (Section 3)
 - **AI self-explanation (3.2):** during stages 2.1–2.2, use the justification prompt on anything unexpected. Treat answers as claims to verify, not truth.
 - **Failure trends (3.3):** log every failure in the Stress Matrix; review the top-ranked boundaries hardest on the next change.
-- **Ownership (3.4):** before merging, tick all three questions on the Ownership page. Log one unassisted rebuild every 30 days.
+- **Ownership (3.4):** before merging, tick all three questions on the Ownership page.
 
 ## Core Review Protocol (Section 2)
 For a module nobody has read yet, run the six stages on the **Core Protocol** page:

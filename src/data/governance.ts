@@ -38,12 +38,3 @@ export const OWNERSHIP_QUESTIONS = [
   { id: "failures", text: "I can name how it fails in production and what the user sees." },
   { id: "mechanics", text: "I can walk through the low-level mechanics line by line without the AI." },
 ] as const;
-
-export interface Rebuild { id: string; date: string; feature: string; lesson: string }
-
-/** Days until the next monthly unassisted rebuild is due (negative = overdue). */
-export function rebuildDue(rebuilds: Rebuild[], today: Date) {
-  if (!rebuilds.length) return 0;
-  const last = rebuilds.map((r) => new Date(r.date).getTime()).reduce((a, b) => Math.max(a, b));
-  return Math.ceil((last + 30 * 864e5 - today.getTime()) / 864e5);
-}
