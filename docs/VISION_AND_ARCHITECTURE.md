@@ -16,9 +16,10 @@ Omar's Skills exists to keep the speed while protecting two things that cannot b
 
 ## System architecture
 ```text
- Core Protocol  ──►  6 Section-2 stages, intent first, diff gating last
+ Core Protocol  ──►  6 Section-2 stages + AI self-explanation prompt (3.2)
  Review Runway  ──►  4 checkpoints + outside-in trace + priority audits
- Stress Matrix  ──►  5 boundaries x checks, pass/fail/waive, severity, red-team prompt
+ Stress Matrix  ──►  5 boundaries x checks, pass/fail/waive, red-team prompt, failure trends (3.3)
+ Ownership      ──►  line-ownership check + monthly unassisted rebuild (3.4)
  Docs           ──►  this folder, rendered in-app
 ```
 All content is data-driven. Pages are thin renderers over `src/data/*`, so the methodology can evolve without touching UI code.

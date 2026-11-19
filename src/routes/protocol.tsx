@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { Check, ArrowRight, RotateCcw } from "lucide-react";
+import { Check, ArrowRight, RotateCcw, Copy } from "lucide-react";
+import { justificationPrompt } from "@/data/governance";
 import { STAGES, INTENT_FIELDS, DIFF_GATES, protocolProgress } from "@/data/protocol";
 import { PageHeader, meta } from "@/components/app/AppShell";
 import { useLocalState } from "@/lib/use-local-state";
@@ -56,6 +57,7 @@ function Protocol() {
               ))}
             </div>
           )}
+          {(stage.id === "intent" || stage.id === "outside-in") && <JustifyPanel />}
           {stage.id === "gating" && (
             <div className="flex flex-col gap-2 md:flex-row md:items-stretch">
               {DIFF_GATES.map((g, i) => (
@@ -87,6 +89,25 @@ function Protocol() {
           </div>
         </div>
       </section>
+    </div>
+  );
+}
+
+function JustifyPanel() {
+  const [target, setTarget] = useState("");
+  const [copied, setCopied] = useState(false);
+  const prompt = justificationPrompt(target);
+  return (
+    <div className="rounded-md border border-dashed border-primary/50 bg-background p-4">
+      <p className="font-mono text-xs text-primary">3.2 · AI SELF-EXPLANATION</p>
+      <p className="mt-1 text-sm text-muted-foreground">Something unexpected? Make the AI justify its design, extra helpers and assumptions, then check each claim against the code.</p>
+      <input value={target} onChange={(e) => setTarget(e.target.value)} placeholder="e.g. src/orders/service.ts lines 40-90"
+        className="mt-3 w-full rounded-md border border-input bg-background px-3 py-2 text-sm outline-none focus:border-primary" />
+      <div className="relative mt-3">
+        <pre className="max-h-60 overflow-auto whitespace-pre-wrap rounded-md bg-muted p-3 font-mono text-xs">{prompt}</pre>
+        <button onClick={() => { navigator.clipboard.writeText(prompt); setCopied(true); setTimeout(() => setCopied(false), 1500); }}
+          className="absolute right-2 top-2 flex items-center gap-1 rounded bg-primary px-2 py-1 text-xs text-primary-foreground"><Copy className="h-3 w-3" />{copied ? "Copied" : "Copy"}</button>
+      </div>
     </div>
   );
 }

@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DocsRouteImport } from './routes/docs'
 import { Route as MatrixRouteImport } from './routes/matrix'
+import { Route as OwnershipRouteImport } from './routes/ownership'
 import { Route as ProtocolRouteImport } from './routes/protocol'
 
 const IndexRoute = IndexRouteImport.update({
@@ -29,6 +30,11 @@ const MatrixRoute = MatrixRouteImport.update({
   path: '/matrix',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OwnershipRoute = OwnershipRouteImport.update({
+  id: '/ownership',
+  path: '/ownership',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProtocolRoute = ProtocolRouteImport.update({
   id: '/protocol',
   path: '/protocol',
@@ -39,12 +45,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/docs': typeof DocsRoute
   '/matrix': typeof MatrixRoute
+  '/ownership': typeof OwnershipRoute
   '/protocol': typeof ProtocolRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/docs': typeof DocsRoute
   '/matrix': typeof MatrixRoute
+  '/ownership': typeof OwnershipRoute
   '/protocol': typeof ProtocolRoute
 }
 export interface FileRoutesById {
@@ -52,20 +60,22 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/docs': typeof DocsRoute
   '/matrix': typeof MatrixRoute
+  '/ownership': typeof OwnershipRoute
   '/protocol': typeof ProtocolRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/docs' | '/matrix' | '/protocol'
+  fullPaths: '/' | '/docs' | '/matrix' | '/ownership' | '/protocol'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/docs' | '/matrix' | '/protocol'
-  id: '__root__' | '/' | '/docs' | '/matrix' | '/protocol'
+  to: '/' | '/docs' | '/matrix' | '/ownership' | '/protocol'
+  id: '__root__' | '/' | '/docs' | '/matrix' | '/ownership' | '/protocol'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DocsRoute: typeof DocsRoute
   MatrixRoute: typeof MatrixRoute
+  OwnershipRoute: typeof OwnershipRoute
   ProtocolRoute: typeof ProtocolRoute
 }
 
@@ -92,6 +102,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MatrixRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ownership': {
+      id: '/ownership'
+      path: '/ownership'
+      fullPath: '/ownership'
+      preLoaderRoute: typeof OwnershipRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/protocol': {
       id: '/protocol'
       path: '/protocol'
@@ -106,6 +123,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DocsRoute: DocsRoute,
   MatrixRoute: MatrixRoute,
+  OwnershipRoute: OwnershipRoute,
   ProtocolRoute: ProtocolRoute,
 }
 export const routeTree = rootRouteImport

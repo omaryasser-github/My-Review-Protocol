@@ -4,6 +4,7 @@ import { Copy, Plus, Trash2, RotateCcw } from "lucide-react";
 import { BOUNDARIES, scoreMatrix, type Severity } from "@/data/review";
 import { PageHeader, SeverityTag, meta } from "@/components/app/AppShell";
 import { useLocalState } from "@/lib/use-local-state";
+import { boundaryTrends } from "@/data/governance";
 
 export const Route = createFileRoute("/matrix")({
   head: () => meta("Boundary Stress Matrix — Omar's Skills", "Audit AI code across the 5 critical failure boundaries."),
@@ -97,6 +98,18 @@ Do not praise. Do not summarise. If you cannot break a boundary, say what you tr
             <input value={draft.note} onChange={(e) => setDraft({ ...draft, note: e.target.value })} placeholder="What broke?" className="min-w-40 flex-1 rounded-md border border-input bg-background px-3 py-2 text-sm outline-none focus:border-primary" />
             <button className="flex items-center gap-1 rounded-md bg-primary px-3 py-2 text-sm text-primary-foreground"><Plus className="h-4 w-4" />Log</button>
           </form>
+          <div className="mt-4 rounded-md border border-border bg-card p-4">
+            <p className="font-mono text-xs text-primary">3.3 · FAILURE TRENDS</p>
+            <p className="mt-1 text-xs text-muted-foreground">Which boundaries fail most in your log (blockers weigh 3, warnings 2, nitpicks 1). Check the top ones hardest.</p>
+            <ul className="mt-3 space-y-2">
+              {boundaryTrends(log).map((t, i) => (
+                <li key={t.boundary} className="text-xs">
+                  <div className="flex justify-between"><span className={i === 0 && t.risk ? "font-semibold text-destructive" : ""}>{t.boundary}</span><span className="font-mono text-muted-foreground">{t.count} · {t.share}% · {t.blockers} blk</span></div>
+                  <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-muted"><div className={`h-full transition-all ${t.blockers ? "bg-destructive" : "bg-primary"}`} style={{ width: `${t.share}%` }} /></div>
+                </li>
+              ))}
+            </ul>
+          </div>
           <ul className="mt-4 space-y-2">
             {log.length === 0 && <li className="text-sm text-muted-foreground">No failure modes logged yet.</li>}
             {log.map((f) => (
