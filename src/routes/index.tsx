@@ -17,7 +17,7 @@ function Runway() {
   const [done, setDone] = useLocalState<Record<string, boolean>>("runway-steps", {});
   const [effect, setEffect] = useState("db");
   const [audits, setAudits] = useLocalState<Record<string, boolean>>("runway-audits", {});
-  const cp = CHECKPOINTS[active];
+  const cp = CHECKPOINTS[active]!;
   return (
     <div>
       <PageHeader kicker="Operational SOP" title="Review Runway" desc="Four checkpoints every AI-generated change must clear before it reaches production." />

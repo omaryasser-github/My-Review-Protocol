@@ -17,7 +17,7 @@ function Skills() {
   const [tier, setTier] = useState("all");
   const [status, setStatus] = useState("all");
   const [statuses, setStatuses] = useLocalState<Record<string, SkillStatus>>("skill-status", {});
-  const [selected, setSelected] = useState(SKILLS[0].id);
+  const [selected, setSelected] = useState(SKILLS[0]!.id);
   const st = (id: string) => statuses[id] ?? "Not started";
   const list = SKILLS.filter((s) => (domain === "all" || s.domain === domain) && (tier === "all" || s.tier === tier) && (status === "all" || st(s.id) === status));
   const sel = SKILLS.find((s) => s.id === selected)!;

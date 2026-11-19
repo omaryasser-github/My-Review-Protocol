@@ -22,7 +22,7 @@ function Matrix() {
   const [results, setResults] = useLocalState<Record<string, string>>("matrix", {});
   const [log, setLog] = useLocalState<Failure[]>("failure-log", []);
   const [context, setContext] = useState("");
-  const [draft, setDraft] = useState<{ boundary: string; severity: Severity; note: string }>({ boundary: BOUNDARIES[0].title, severity: "Blocker", note: "" });
+  const [draft, setDraft] = useState<{ boundary: string; severity: Severity; note: string }>({ boundary: BOUNDARIES[0]!.title, severity: "Blocker", note: "" });
   const [copied, setCopied] = useState(false);
   const s = scoreMatrix(results);
 
