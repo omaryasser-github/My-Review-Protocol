@@ -5,6 +5,8 @@ import remarkGfm from "remark-gfm";
 import { FileText } from "lucide-react";
 import vision from "../../docs/VISION_AND_ARCHITECTURE.md?raw";
 import sop from "../../docs/CODE_REVIEW_SOP.md?raw";
+import features from "../../docs/FEATURES.md?raw";
+import adding from "../../docs/ADDING_A_SKILL.md?raw";
 import { meta } from "@/components/app/AppShell";
 
 export const Route = createFileRoute("/docs")({
@@ -15,6 +17,8 @@ export const Route = createFileRoute("/docs")({
 const DOCS = [
   { id: "vision", title: "Vision & Architecture", file: "VISION_AND_ARCHITECTURE.md", body: vision },
   { id: "sop", title: "Code Review SOP", file: "CODE_REVIEW_SOP.md", body: sop },
+  { id: "features", title: "Features & Skills", file: "FEATURES.md", body: features },
+  { id: "adding", title: "Adding a Skill", file: "ADDING_A_SKILL.md", body: adding },
 ];
 
 function Docs() {

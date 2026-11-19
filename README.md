@@ -57,6 +57,8 @@ src/
 docs/
   VISION_AND_ARCHITECTURE.md   the senior-engineering vision and why it's built this way
   CODE_REVIEW_SOP.md           the standard operating procedure for reviewing AI output
+  FEATURES.md                  every feature and skill in the app
+  ADDING_A_SKILL.md            easiest way to add a new skill
 ```
 
 ### Adding or changing content
