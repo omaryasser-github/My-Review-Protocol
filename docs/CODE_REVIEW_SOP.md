@@ -44,3 +44,12 @@ Before the assistant writes anything:
 
 ## Red-team prompt
 Use the generator in the Stress Matrix to ask a *second* model to attack the change across the five boundaries. Log each failure mode it finds, then verify it yourself — the red-team model is a lead, not a verdict.
+
+## Core Review Protocol (Section 2)
+For a module nobody has read yet, run the six stages on the **Core Protocol** page:
+1. **Reconstruct intent** — write expected inputs, outputs, side effects, error paths and acceptance criteria *before* opening the diff.
+2. **Outside-in reading** — trace every terminal side effect back to its input; check schemas, global state and integrations.
+3. **Risk-weighted line auditing** — deletions and modifications first.
+4. **Boundary stress testing** — complete the Stress Matrix with zero blockers.
+5. **Test suite integrity** — read tests before code; no self-mocking or weakened assertions.
+6. **Hierarchical diff gating** — automated noise filter → file tree → granular line inspection.

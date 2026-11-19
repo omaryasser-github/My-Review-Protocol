@@ -9,6 +9,7 @@ An interactive AI-code review workstation. It turns the **AI-Generated Code Revi
 | Section | Path | What it does |
 | --- | --- | --- |
 | **Review Runway** | `/` | The four review checkpoints in order — scope bounding, approval gating, diff auditing, pre-merge gate — plus a side-effect map that traces a database write, outbound request, background job or event back to the input boundary it came from, and the three priority audit checklists. |
+| **Core Review Protocol** | `/protocol` | Six guided stages from Section 2 of the guide — write your intent before reading the code, then outside-in reading, line auditing, stress testing, test integrity and diff gating. Progress is saved. |
 | **Stress Matrix** | `/matrix` | 16 checks across five boundaries (payload, configuration, network, exceptions, concurrency), each tagged `Blocker`, `Warning` or `Nitpick`. Mark pass / fail / waive and the score and merge status update live — a failed blocker reads **Merge blocked**. Includes a red-team prompt generator with a copy button and a log of failure modes you hit. |
 | **Docs** | `/docs` | Reads the markdown files in `docs/` straight into the app, so the repo docs and the in-app docs are the same file. |
 
@@ -46,6 +47,7 @@ src/
     review.test.ts tests for the scoring rule
   routes/
     index.tsx      Review Runway
+    protocol.tsx   Core Review Protocol
     matrix.tsx     Stress Matrix
     docs.tsx       in-app docs viewer
     __root.tsx     shell, theme, 404 and error screens

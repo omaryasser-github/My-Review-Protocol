@@ -16,6 +16,7 @@ Omar's Skills exists to keep the speed while protecting two things that cannot b
 
 ## System architecture
 ```text
+ Core Protocol  ──►  6 Section-2 stages, intent first, diff gating last
  Review Runway  ──►  4 checkpoints + outside-in trace + priority audits
  Stress Matrix  ──►  5 boundaries x checks, pass/fail/waive, severity, red-team prompt
  Docs           ──►  this folder, rendered in-app

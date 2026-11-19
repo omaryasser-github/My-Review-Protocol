@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DocsRouteImport } from './routes/docs'
 import { Route as MatrixRouteImport } from './routes/matrix'
+import { Route as ProtocolRouteImport } from './routes/protocol'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -28,35 +29,44 @@ const MatrixRoute = MatrixRouteImport.update({
   path: '/matrix',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProtocolRoute = ProtocolRouteImport.update({
+  id: '/protocol',
+  path: '/protocol',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/docs': typeof DocsRoute
   '/matrix': typeof MatrixRoute
+  '/protocol': typeof ProtocolRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/docs': typeof DocsRoute
   '/matrix': typeof MatrixRoute
+  '/protocol': typeof ProtocolRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/docs': typeof DocsRoute
   '/matrix': typeof MatrixRoute
+  '/protocol': typeof ProtocolRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/docs' | '/matrix'
+  fullPaths: '/' | '/docs' | '/matrix' | '/protocol'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/docs' | '/matrix'
-  id: '__root__' | '/' | '/docs' | '/matrix'
+  to: '/' | '/docs' | '/matrix' | '/protocol'
+  id: '__root__' | '/' | '/docs' | '/matrix' | '/protocol'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DocsRoute: typeof DocsRoute
   MatrixRoute: typeof MatrixRoute
+  ProtocolRoute: typeof ProtocolRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -82,6 +92,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MatrixRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/protocol': {
+      id: '/protocol'
+      path: '/protocol'
+      fullPath: '/protocol'
+      preLoaderRoute: typeof ProtocolRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -89,6 +106,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DocsRoute: DocsRoute,
   MatrixRoute: MatrixRoute,
+  ProtocolRoute: ProtocolRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
