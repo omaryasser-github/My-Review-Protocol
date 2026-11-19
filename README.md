@@ -1,72 +1,85 @@
-# Boundary Checkpoint Compass
+# Omar's Skills
 
-Build an interactive, highly-structured visual web app and extensible Engineering Skill Repository called "Omar's Skills", based on the AI-Generated Code Review Protocol and Junior Developer Growth Framework.
+An interactive engineering skill repository and AI-code review workstation. It turns two working documents — an **AI-Generated Code Review Protocol** and a **Junior Developer Growth Framework** — into a tool you can actually run: a review checklist you tick off, a stress matrix that blocks a merge, a skill tree you track, and a roadmap you work through.
 
-Also create a `docs/` folder containing detailed markdown files explaining the senior engineering vision, why this system was built this way, how the outside-in review protocol defends production, how the junior developer anti-atrophy roadmap works, and how to extend this repository with new skills in the future.
+> ship fast. own every line.
 
-### Application Structure & Key Views
+## What's inside
 
-1. **Review Runway (Operational Code Review SOP):**
-   - Interactive 4-Checkpoint Process: Pre-Execution Scope Bounding → Incremental Approval Gating → Post-Run Diff Auditing → Pre-Merge Automated Gate.
-   - Interactive Visual Diagram: Outside-In & Terminal Side-Effect Backward Tracing (visualizing how to trace backwards from terminal mutations—DB writes, outbound HTTP requests, background queues, event emissions—back to input boundaries).
-   - Priority Audit Guides: Line deletion and modification auditing, boundary layer security, and mock/assertion sanitization.
+| Section | Path | What it does |
+| --- | --- | --- |
+| **Review Runway** | `/` | The four review checkpoints in order — scope bounding, approval gating, diff auditing, pre-merge gate — plus a side-effect map that traces a database write, outbound request, background job or event back to the input boundary it came from, and the three priority audit checklists. |
+| **Stress Matrix** | `/matrix` | 16 checks across five boundaries (payload, configuration, network, exceptions, concurrency), each tagged `Blocker`, `Warning` or `Nitpick`. Mark pass / fail / waive and the score and merge status update live — a failed blocker reads **Merge blocked**. Includes a red-team prompt generator with a copy button and a log of failure modes you hit. |
+| **Skill Repository** | `/skills` | 8 core and 5 supplementary skills across 6 domains, filterable by domain, tier and status. Each skill shows its competencies, practice exercises, what it builds on and what it unlocks. Set your own status: Not started → Learning → Proficient. |
+| **Growth Roadmap** | `/roadmap` | Three phases — Foundational Proficiency, Architecture & Quality, Technical Ownership — with milestone checkboxes and progress bars. |
+| **Docs** | `/docs` | Reads the markdown files in `docs/` straight into the app, so the repo docs and the in-app docs are the same file. |
 
-2. **Boundary Stress Matrix:**
-   - Interactive audit checklist covering the 5 critical failure boundaries:
-     * Payload Integrity (empty payloads, zero-values, structural type mismatches, malformed JSON)
-     * Configuration (missing env vars, fallback failures, uninitialized feature flags)
-     * Network Failure (upstream timeouts, transient network drops, circuit breaker handling)
-     * Exception Paths (uncaught exceptions, generic catch blocks, missing transactional rollback)
-     * Concurrency (race conditions, state mutation safety, unhandled concurrent operations)
-   - Interactive pass/fail/waive toggles with progress scoring and severity tags (`[Blocker]`, `[Warning]`, `[Nitpick]`).
-   - Red-Team AI Auditing prompt generator & failure-mode logger.
+Dark and light mode, no login, nothing to install.
 
-3. **Engineering Skill Repository & Interactive Taxonomy:**
-   - Visual, interactive skill tree featuring the 8 Core Engineering Skills:
-     1. Deep Core Language Proficiency
-     2. Version Control & Diff Hygiene
-     3. Relational & Non-Relational Data Management
-     4. HTTP & REST API Architecture
-     5. System Debugging & Diagnostics
-     6. Core Data Structures & Computational Complexity
-     7. Software Testing Fundamentals
-     8. Command Line & Terminal Operations
-   - Supplementary & Mid-Level Skills: Containerization & Infrastructure, CI/CD Pipelines, Cloud Computing Infrastructure, Software Design Patterns & Architecture, Distributed System Design.
-   - Filterable by domain, tier (`Core` vs `Supplementary`), and status.
-   - Modular data structure: Extensible TypeScript/JSON registry so new skills can be added effortlessly.
-
-4. **Targeted Phased Growth Roadmap:**
-   - Phase 1 (Immediate Focus): Foundational Proficiency
-   - Phase 2 (Intermediate Focus): Architecture & Quality
-   - Phase 3 (Ongoing Mastery): Technical Ownership & Monthly Unassisted Feature Rebuilds
-   - Interactive progress tracking that persists to local state.
-
-5. **In-App Docs Viewer & `docs/` Repository Files:**
-   - Create comprehensive markdown files in the project's `docs/` directory:
-     * `docs/VISION_AND_ARCHITECTURE.md`: High-level philosophy on fast AI-assisted shipping without sacrificing technical ownership, explaining the outside-in review paradigm and why junior developer foundational skills must be actively protected.
-     * `docs/CODE_REVIEW_SOP.md`: The complete step-by-step Standard Operating Procedure for reviewing AI-generated code.
-     * `docs/EXTENDING_SKILLS.md`: Developer guide on how to add new skill domains (e.g., DevOps, Security, Frontend) to the repository schema.
-   - Provide an in-app viewer tab so team members can read these docs directly in the application.
-
-Design with a high-craft, modern engineering aesthetic (clean dark/light mode, Lucide icons, responsive split-screen layouts, smooth animations, and clear typography).
-
-This project was built with [Lovable](https://lovable.dev).
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/e4b6c114-fff3-489e-be49-b918effd104d).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+## Quick start
 
 ```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
+npm install       # or: bun install
+npm run dev       # or: bun run dev
 ```
+
+Open the URL the dev server prints (usually `http://localhost:8080`).
+
+### Scripts
+
+| Command | Does |
+| --- | --- |
+| `npm run dev` | Dev server with hot reload |
+| `npm run build` | Production build |
+| `npm run preview` | Serve the production build locally |
+| `npm test` | Run the test suite once |
+| `npm run lint` | ESLint over the repo |
+| `npm run format` | Prettier write |
+
+## How it's put together
+
+The rule this repo follows: **all methodology content lives as typed data in `src/data/*`; pages are thin renderers.** Content can grow without touching the UI, and the UI can change without touching the content.
+
+```
+src/
+  data/
+    review.ts      checkpoints, side effects, trace layers, audit checklists,
+                   the 16 boundary checks + scoreMatrix()
+    skills.ts      DOMAINS, SKILLS (8 core + 5 supplementary), STATUSES
+    roadmap.ts     PHASES and their milestones
+    review.test.ts tests for the scoring rule
+  routes/
+    index.tsx      Review Runway
+    matrix.tsx     Stress Matrix
+    skills.tsx     Skill Repository
+    roadmap.tsx    Growth Roadmap
+    docs.tsx       in-app docs viewer
+    __root.tsx     shell, theme, 404 and error screens
+  components/app/
+    AppShell.tsx   sidebar nav, PageHeader, SeverityTag, head() helper
+  lib/
+    use-local-state.ts  localStorage-backed state hook
+  styles.css       Tailwind v4 theme tokens (dark/light)
+docs/
+  VISION_AND_ARCHITECTURE.md   the senior-engineering vision and why it's built this way
+  CODE_REVIEW_SOP.md           the standard operating procedure for reviewing AI output
+  EXTENDING_SKILLS.md          how to add a new skill domain
+```
+
+### Adding or changing content
+
+- **New skill** — add one object to `SKILLS` in `src/data/skills.ts`: `id`, `name`, `domain`, `tier`, `summary`, `competencies`, `practice`, optional `prerequisites`, and a Lucide `icon`. It appears in the repository automatically.
+- **New domain** (e.g. Security, DevOps, Frontend) — add it to `DOMAINS` in the same file and point skills at it. `docs/EXTENDING_SKILLS.md` walks through it end to end.
+- **New review check** — add it to a boundary's `checks` array in `src/data/review.ts` with a `severity`. The score, blocker count and merge status pick it up with no other change.
+- **New milestone or phase** — edit `PHASES` in `src/data/roadmap.ts`.
+- **New doc** — drop a `.md` file in `docs/` and register it in `src/routes/docs.tsx`; it renders in the Docs tab.
+
+`scoreMatrix()` is the one piece of real logic (score, decided count, failed blockers) and it's covered by `src/data/review.test.ts`. If you change a scoring rule, change that test with it.
+
+### Where your progress lives
+
+Tick marks, skill statuses, logged failure modes and the theme are stored in **your browser's localStorage** (`use-local-state.ts`). There is no backend and no account: nothing syncs between people or devices, and clearing site data resets you to zero. That's deliberate — this is a personal and team reference tool, not a service.
+
+## Tech
+
+TanStack Start (React 19, file-based routing) · TypeScript · Tailwind CSS v4 · shadcn/ui primitives · Lucide icons · react-markdown · Vitest.
