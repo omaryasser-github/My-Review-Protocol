@@ -1,4 +1,4 @@
-# Omar's Skills
+# My-Review-Protocol
 
 An interactive AI-code review workstation. It turns the **AI-Generated Code Review Protocol** into a tool you can run: a review checklist you tick off and a stress matrix that blocks a merge.
 
